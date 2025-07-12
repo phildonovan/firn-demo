@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_vehicles
+    columns:
+      - name: objectid
+        tests:
+          - unique
+          - not_null
+  - name: stg_charging_stations
+    columns:
+      - name: objectid
+        tests:
+          - unique
+          - not_null
+  - name: dim_time
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+  - name: dim_location
+    columns:
+      - name: location_key
+        tests:
+          - not_null
+  - name: fact_ev_metrics
+    columns:
+      - name: time_key
+        tests:
+          - not_null
+  - name: fact_station_metrics
+    columns:
+      - name: time_key
+        tests:
+          - not_null
+  - name: mart_supply_demand
+    columns:
+      - name: year
+        tests:
+          - not_null

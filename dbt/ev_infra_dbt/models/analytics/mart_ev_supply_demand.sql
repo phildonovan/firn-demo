@@ -13,5 +13,5 @@ SELECT
   COALESCE(fm.cumulative_ev_count / NULLIF(fm.cumulative_station_count, 0), 0) AS cumulative_ev_per_station_ratio,
   COALESCE(fm.cumulative_ev_count / NULLIF(fm.cumulative_connector_sum, 0), 0) AS cumulative_ev_per_connector_ratio
 FROM {{ ref('dim_year_month_span') }} dd
-LEFT JOIN {{ ref('fact_cumulative_metrics') }} fm ON dd.date_key = fm.date_key
+LEFT JOIN {{ ref('fact_ev_charging_metrics') }} fm ON dd.date_key = fm.date_key
 WHERE dd.year IS NOT NULL
