@@ -8,7 +8,7 @@ WITH ranked_distances AS (
     station2_name,
     distance_km_st_distance,
     station1_lat,
-    station2_lon,
+    station1_lon,
     station1_geometry,
     ROW_NUMBER() OVER (
       PARTITION BY station1_id
@@ -23,7 +23,7 @@ top_5_distances AS (
     station1_id,
     station1_name,
     ANY_VALUE(station1_lat) AS lat,
-    ANY_VALUE(station2_lon) AS lon,
+    ANY_VALUE(station1_lon) AS lon,
     AVG(distance_km_st_distance) AS avg_closest_5_distance_km,
     ANY_VALUE(station1_geometry) AS station_geometry  -- Aggregate geometry (since same for all rows per station1_id)
   FROM ranked_distances
