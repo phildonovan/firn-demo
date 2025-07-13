@@ -10,6 +10,9 @@
 CONNECTION=${1:-electric-vehicles-raw}
 DATA_DIR=${DATA_DIR:-./../data} 
 
+echo "Deploying the database."
+snow sql -f sql/deploy-db.sql --connection "$CONNECTION" || { echo "Deploying database failed"; exit 1 }
+
 echo "Uploading data... Electric Vehicles CSV"
 snow sql -q "PUT file://$DATA_DIR/motor-vehicle-register-api-dt.csv @EV_INFRA_ANALYSIS.RAW.raw_stage AUTO_COMPRESS=TRUE;" --connection "$CONNECTION" || { echo "CSV upload failed"; exit 1; }
 
